@@ -5,6 +5,7 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
+  - pip
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=2_gnu
   - _py-xgboost-mutex=2.0=cpu_0
@@ -153,7 +154,6 @@ dependencies:
   - libbrotlienc=1.0.9=h166bdaf_9
   - libcap=2.66=ha37c62d_0
   - libcblas=3.9.0=17_linux64_openblas
-  - libclang=15.0.7=default_h7634d5b_2
   - libclang13=15.0.7=default_h9986a30_2
   - libcups=2.3.3=h36d4200_3
   - libcurl=8.1.1=h91b91d3_1
@@ -211,7 +211,7 @@ dependencies:
   - libxkbcommon=1.5.0=h79f4944_1
   - libxml2=2.10.3=hca2bb57_4
   - libzlib=1.2.13=hd590300_5
-  - llvmlite=0.40.1=py310h1b8f574_0
+  - llvmlite=0.42.0=py310h1b8f574_1
   - lz4=4.3.2=py310h0cfdcf0_0
   - lz4-c=1.9.3=h9c3ff4c_1
   - markupsafe=2.1.3=py310h2372a71_0
@@ -238,8 +238,8 @@ dependencies:
   - notebook-shim=0.2.3=pyhd8ed1ab_0
   - nspr=4.35=h27087fc_0
   - nss=3.89.1=h6a678d5_0
-  - numba=0.57.1=py310h0f6aa51_0
-  - numpy=1.24.4=py310ha4c1d20_0
+  - numba=0.59.1=py310h7dc5dd1_0
+  - numpy=1.26.4=py310hb13e2d6_0
   - openssl=1.1.1w=hd590300_0
   - overrides=7.3.1=pyhd8ed1ab_0
   - p2j=1.3.2=pyhd8ed1ab_0
@@ -254,7 +254,6 @@ dependencies:
   - pexpect=4.8.0=pyh1a96a4e_2
   - pickleshare=0.7.5=py_1003
   - pillow=9.4.0=py310h6a678d5_0
-  - pip=23.1.2=pyhd8ed1ab_0
   - pixman=0.40.0=h36c2ea0_0
   - pkgutil-resolve-name=1.3.10=pyhd8ed1ab_0
   - platformdirs=3.8.1=pyhd8ed1ab_0
@@ -303,7 +302,7 @@ dependencies:
   - root_numpy=4.8.0=py310ha651d66_16
   - rpds-py=0.8.10=py310hcb5633a_0
   - scikit-learn=1.3.0=py310hf7d194e_0
-  - scipy=1.11.1=py310ha4c1d20_0
+  - scipy=1.14.0=py310h3fe0a75_2
   - scitokens-cpp=0.7.1=h0255ffa_0
   - send2trash=1.8.2=pyh41d4057_0
   - setuptools=68.0.0=pyhd8ed1ab_0
@@ -325,8 +324,6 @@ dependencies:
   - tornado=6.3.2=py310h2372a71_0
   - tqdm=4.65.0=pyhd8ed1ab_1
   - traitlets=5.9.0=pyhd8ed1ab_0
-  - typing-extensions=4.7.1=hd8ed1ab_0
-  - typing_extensions=4.7.1=pyha770c72_0
   - typing_utils=0.1.0=pyhd8ed1ab_0
   - tzdata=2023c=h71feb2d_0
   - unicodedata2=15.0.0=py310h5764c6d_0
@@ -374,4 +371,35 @@ dependencies:
   - zlib=1.2.13=hd590300_5
   - zstandard=0.19.0=py310h1275a96_2
   - zstd=1.5.2=hfc55251_7
+  - pip:
+      - absl-py==2.5.1
+      - astunparse==1.6.3
+      - energyflow==1.4.0
+      - flatbuffers==25.12.19
+      - gast==0.7.0
+      - google-pasta==0.2.0
+      - grpcio==1.84.0
+      - h5py==3.14.0
+      - keras==3.12.4
+      - libclang==18.1.1
+      - markdown-it-py==4.2.0
+      - mdurl==0.1.2
+      - ml-dtypes==0.5.4
+      - namex==0.1.0
+      - opt-einsum==3.4.0
+      - optree==0.20.0
+      - pip==26.2.1
+      - protobuf==7.36.2
+      - rich==15.0.0
+      - tensorflow==2.21.0
+      - tensorrt==11.4.0.106
+      - tensorrt-cu13==11.4.0.106
+      - tensorrt-cu13-bindings==11.4.0.106
+      - tensorrt-cu13-libs==11.4.0.106
+      - termcolor==3.3.0
+      - tf-keras==2.21.0
+      - typing-extensions==4.16.0
+      - wasserstein==1.1.0
+      - wrapt==2.5.0
+      - wurlitzer==3.1.1
 prefix: /home/ys668/.conda/envs/my_env_2

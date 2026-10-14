@@ -3,12 +3,14 @@
 
 import sys
 import os
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
+
 import random
 import numpy as np
 import pandas as pd
 import uproot
-# import tensorrt
-import energyflow as ef
+import tensorrt
+from energyflow import archs
 import tensorflow as tf
 
 # set seed
@@ -82,10 +84,10 @@ def omnifold(X_gen_i, Y_gen_i, X_det_i, Y_det_i, wdata, winit, det_model, mc_mod
     for i in range(it):
         if model_det_fp is not None:
             model_det_fp_i = model_det_fp.format(i)
-            det_model[1]['filepath'] = model_det_fp_i + '_Epoch-{epoch}'
+            det_model[1]['filepath'] = model_det_fp_i + '_Epoch-{epoch}.weights.h5'
         if model_mc_fp is not None:
             model_mc_fp_i = model_mc_fp.format(i)
-            mc_model[1]['filepath'] = model_mc_fp_i + '_Epoch-{epoch}'
+            mc_model[1]['filepath'] = model_mc_fp_i + '_Epoch-{epoch}.weights.h5'
         model_det = det_model[0](**det_model[1])
         model_mc = mc_model[0](**mc_model[1])
         if i > 0:
@@ -190,7 +192,7 @@ fitargs2 = {'batch_size': batch_size, 'epochs': 100, 'verbose': 1}
 
 # multifold
 tf.config.list_physical_devices('GPU')
-multifold_ws,history = omnifold(X_gen, Y_gen, X_det, Y_det, wdata, winit, (ef.archs.DNN, det_args), (ef.archs.DNN, mc_args),
+multifold_ws,history = omnifold(X_gen, Y_gen, X_det, Y_det, wdata, winit, (archs.DNN, det_args), (archs.DNN, mc_args),
                                 fitargs1, fitargs2, val=valnum, it=itnum, trw_ind=-2, weights_filename=str(seed))
 
 # save results
