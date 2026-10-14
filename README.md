@@ -7,7 +7,7 @@
 - Source code change
   - Changed `~/.conda/envs/my_env_2/lib/python3.10/site-packages/energyflow/archs/archbase.py` to [archbase.py](https://github.com/y-song/multifold-101326/blob/master/archbase.py)
 
-- Test run
+- Test MultiFold run
   ```
   salloc --time 4:0:00 --gpus 1 --partition gpu_devel --mem 100G
   module load miniconda
@@ -15,6 +15,7 @@
   source setup_cuda.sh
   python multifold.py 1  
   ```
+  Output is saved as csv files at `~/scratch_pi_hlc7/ys668/test_101326/`
 
 - Test plotting script
-  - [plot.ipynb](https://github.com/y-song/multifold-101326/blob/master/plot.ipynb)
+  - [plot.ipynb](https://github.com/y-song/multifold-101326/blob/master/plot.ipynb) reads in MultiFold output and plots results
