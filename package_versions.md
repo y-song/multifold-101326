@@ -6,6 +6,11 @@ Both GitHub YAML files were fetched again on October 13, 2026 (Pacific time). Th
 
 - [Previous environment.yml](https://github.com/y-song/multid_jet_substructure/blob/main/multifold/environment.yml), used for running MultiFold on Grace. In principle I could have just recreated this environment on Bouchet (and then additionally installed relevant packages for jupyterlab, see below), but for some reason only the conda installed packages were successfully recreated; the pip installed packages didn't get re-installed. This led to (a painful process of) re-installation of newer versions of TensorFlow, CUDA, TensorRT, EnergyFlow, and tf-keras, some of which were not compatible with basic packages such as NumPy. The result is:
 - [Current my_env_2.yml](https://github.com/y-song/multifold-101326/blob/master/my_env_2.yml), used for running MultiFold on Bouchet.
+- Pip install commands and documentation links because I already have them saved:
+  - `python -m pip install tensorflow[and-cuda]`. See [documentation](https://www.tensorflow.org/install/pip) for more information.
+  - `python -m pip install --upgrade tensorrt`. See [documentation](https://docs.nvidia.com/deeplearning/tensorrt/latest/installing-tensorrt/install-pip.html#) for more information.
+  - `pip install energyflow`. See [documentation](https://energyflow.network/installation/#install-via-pip) for more information.
+  - `pip install tf-keras`. See [documentation](https://pypi.org/project/tf-keras/) for more information.
 
 ## Numerical and machine-learning packages
 

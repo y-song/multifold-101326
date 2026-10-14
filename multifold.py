@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+# copied from ~/analysis/run12/data/unfolding/good/final_0628/multifold.py
 
 import sys
 import os
