@@ -114,17 +114,18 @@ def omnifold(X_gen_i, Y_gen_i, X_det_i, Y_det_i, wdata, winit, det_model, mc_mod
     return ws, history_arr
 
 # prepare dataframe for PYTHIA6+embedding
-observables2 = ['pt','m','q','rg','zg','mg','w','mcevi']
-observabless2 = ['pts','ms','qs','rgs','zgs','mgs']
-inputFiles = ['/nfs/roberts/home/ys668/output/run12/all050124_rc_hadcorr05_notrueptcons.root']
+observables2 = ['pt','m','q','rg','zg','mg','w','mcevi'] # truth
+observabless2 = ['pts','ms','qs','rgs','zgs','mgs'] # reco
+inputFiles = ['/nfs/roberts/home/ys668/output/run12/all050124_rc_notrueptcons.root']
 treeName = ["MatchedTree"]
-df1 = applyCut(getData(observables2+observabless2, inputFiles[0], treeName[0]), 'pt>0 and pts>0 and w<5e-9')
-df1['relw'] = np.asarray(df1['w'])/max(df1['w'])
+df1 = applyCut(getData(observables2+observabless2, inputFiles[0], treeName[0]), 'pt>0 and pts>0 and w<5e-9') # matched jets
+# pt > 0 means not missed, pts > 0 means not fake, w < 5e-9 means pTHat > 9 GeV
+df1['relw'] = np.asarray(df1['w'])/max(df1['w']) # normalize weights
     
 # prepare dataframe for data
 observables1 = ['pt','m','q','rg','zg','mg']
 observabless1 = ['pts','ms','qs','rgs','zgs','mgs']
-file = uproot.open('/nfs/roberts/home/ys668/output/run12/data062824.root')
+file = uproot.open('/nfs/roberts/home/ys668/output/run12/data062824.root') # in this root file, the branches are called pt, m, ..., but I want to convert them to a dataframe with column names pts, ms, ..., matching the reco embedding
 tree = file["ResultTree"].arrays(observables1, library='np')
 df2 = pd.DataFrame(np.transpose(np.array((np.concatenate(tree['pt']), np.concatenate(tree['m']), np.concatenate(tree['q']), np.concatenate(tree['rg']), np.concatenate(tree['zg']), np.concatenate(tree['mg'])))), columns=observabless1)
 
@@ -167,12 +168,15 @@ for obkey, ob in obs.items():
     ob['dataobs'] = ob['func']('data', 's')
     print('Done with', obkey)
 
+# concatenate data (label Y = 1) and MC reco (label Y = 0). matrix shape is (N_data + N_MC, 6).
 X_det = np.asarray([np.concatenate((obs[obkey]['dataobs'], obs[obkey]['simobs'])) for obkey in obs_multifold]).T
 Y_det = np.concatenate((np.ones(len(obs['pt']['dataobs'])), np.zeros(len(obs['pt']['simobs']))))
+# concatenate MC truth (label Y = 1) and duplicated MC truth (label Y = 0).
 X_gen = np.asarray([np.concatenate((obs[obkey]['genobs'], obs[obkey]['genobs'])) for obkey in obs_multifold]).T
 Y_gen = np.concatenate((np.ones(len(obs['pt']['genobs'])), np.zeros(len(obs['pt']['genobs']))))
 X_det = (X_det - np.mean(X_det, axis=0))/np.std(X_det, axis=0)
 X_gen = (X_gen - np.mean(X_gen, axis=0))/np.std(X_gen, axis=0)
+# normalize such that total data weight = total MC weight
 norm = sum(df2['w'])/sum(df1['relw'])
 wdata = df2['w']
 winit = norm*np.asarray(df1['relw'])
