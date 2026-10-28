@@ -8,6 +8,7 @@
   - Changed `~/.conda/envs/my_env_2/lib/python3.10/site-packages/energyflow/archs/archbase.py` to [archbase.py](https://github.com/y-song/multifold-101326/blob/master/archbase.py)
 
 - Test MultiFold run
+  - [multifold.py](https://github.com/y-song/multifold-101326/blob/master/multifold.py)
   ```
   salloc --time 4:0:00 --gpus 1 --partition gpu_devel --mem 100G
   module load miniconda
@@ -19,3 +20,12 @@
 
 - Test plotting script
   - [plot.ipynb](https://github.com/y-song/multifold-101326/blob/master/plot.ipynb) reads in MultiFold output and plots results
+
+- Batch job run
+  - [submit.sh](https://github.com/y-song/multifold-101326/blob/master/submit.sh)
+  - [submit_all.sh](https://github.com/y-song/multifold-101326/blob/master/submit_all.sh)
+  ```
+  module load miniconda
+  conda activate my_env_2
+  sbatch submit_all.sh
+  ```  

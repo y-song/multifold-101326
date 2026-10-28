@@ -1,4 +1,4 @@
-TF_CUDA_LIB_DIRS=$(python - <<'PY'
+TF_CUDA_LIB_DIRS=$("${PYTHON:-python}" - <<'PY'
 from pathlib import Path
 from importlib.metadata import distribution
 
