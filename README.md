@@ -29,3 +29,6 @@
   conda activate my_env_2
   sbatch submit_all.sh
   ```  
+
+- Potential improvement
+  - Currently, `multifold.py` saves the unfolded weights as separate CSV files for each iteration and seed, which takes up a lot of disk space. One possible improvement is to save the weights for all iterations of each seed in a single compressed NumPy (.npz) file instead. This would also require a small change to the `# Read in unfolded` section of `plot.ipynb` to load the .npz files instead of CSVs. The rest of the plotting code could remain unchanged.
