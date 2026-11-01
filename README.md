@@ -16,19 +16,38 @@
   source setup_cuda.sh
   python multifold.py 1  
   ```
-  Output is saved as csv files at `~/scratch_pi_hlc7/ys668/test_101326/`
+  Input embedding file: `/nfs/roberts/home/ys668/output/run12/all050124_rc_notrueptcons.root`  
+  Input data file: `/nfs/roberts/home/ys668/output/run12/data062824.root`  
+  Test run output directory: `/nfs/roberts/scratch/pi_hlc7/ys668/test_101326/`  
+  Full run output directory: `/nfs/roberts/project/pi_hlc7/ys668/run12/csvs/final_0628/20235003_data_batch50000_notrueptcons/`
 
 - Test plotting script
   - [plot.ipynb](https://github.com/y-song/multifold-101326/blob/master/plot.ipynb) reads in MultiFold output and plots results
 
 - Batch job run
   - [submit.sh](https://github.com/y-song/multifold-101326/blob/master/submit.sh)
+  - [submit_stat.sh](https://github.com/y-song/multifold-101326/blob/master/submit_stat.sh)
   - [submit_all.sh](https://github.com/y-song/multifold-101326/blob/master/submit_all.sh)
   ```
   module load miniconda
   conda activate my_env_2
   sbatch submit_all.sh
   ```  
+
+- Runs for systematic uncertainties
+  - Detector effect variations: Modify [multifold.py](https://github.com/y-song/multifold-101326/blob/master/multifold.py). Need to change input embedding file (line 119) and output path (line 204). No need to change input data file (line 128). In principle, also need to change the fake rates (line 134), but the variations we consider have minimal effect on them (same numerical values within two decimals).  
+  Input embedding files: `/nfs/roberts/home/ys668/output/run12/all050124_rc_eff096_notrueptcons.root`, `/nfs/roberts/home/ys668/output/run12/all050124_rc_tow104_notrueptcons.root`, `/nfs/roberts/home/ys668/output/run12/all050124_rc_hadcorr05_notrueptcons.root`  
+  Output directories: `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_eff096_notrueptcons/`, `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_tow104_notrueptcons/`, `/nfs/roberts/project/pi_hlc7/ys668/run12/csvs/final_0628/20235003_hadcorr05_notrueptcons/`
+  - Prior variations: [multifold_pythia8.py]() [multifold_herwig.py]() (TO DO)
+
+- Runs for statistical bootstrap
+  - Data resampling: [multifold_stat.py](https://github.com/y-song/multifold-101326/blob/master/multifold_stat.py)  
+  Output direcotry: `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_datastat_notrueptcons/`
+  - Embedding resampling: [multifold_mc_stat.py](https://github.com/y-song/multifold-101326/blob/master/multifold_mc_stat.py)  
+  Output directory: `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_stat_notrueptcons/`
+
+- Full plotting script
+  - [plot_full.ipynb](https://github.com/y-song/multifold-101326/blob/master/plot_full.ipynb)  
 
 - Potential improvement
   - Currently, `multifold.py` saves the unfolded weights as separate CSV files for each iteration and seed, which takes up a lot of disk space. One possible improvement is to save the weights for all iterations of each seed in a single compressed NumPy (.npz) file instead. This would also require a small change to the `# Read in unfolded` section of `plot.ipynb` to load the .npz files instead of CSVs. The rest of the plotting code could remain unchanged.
