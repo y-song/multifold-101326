@@ -16,10 +16,9 @@
   source setup_cuda.sh
   python multifold.py 1  
   ```
-  Input embedding file: `/nfs/roberts/home/ys668/output/run12/all050124_rc_notrueptcons.root`  
-  Input data file: `/nfs/roberts/home/ys668/output/run12/data062824.root`  
-  Test run output directory: `/nfs/roberts/scratch/pi_hlc7/ys668/test_101326/`  
-  Full run output directory: `/nfs/roberts/project/pi_hlc7/ys668/run12/csvs/final_0628/20235003_data_batch50000_notrueptcons/`
+  - Input embedding file: `/nfs/roberts/home/ys668/output/run12/all050124_rc_notrueptcons.root`  
+    Input data file: `/nfs/roberts/home/ys668/output/run12/data062824.root`  
+    Test run output directory: `/nfs/roberts/scratch/pi_hlc7/ys668/test_101326/`
 
 - Test plotting script
   - [plot.ipynb](https://github.com/y-song/multifold-101326/blob/master/plot.ipynb) reads in MultiFold output and plots results
@@ -34,17 +33,31 @@
   sbatch submit_all.sh
   ```  
 
+- Nominal MultiFold run
+  - This is already done.
+  - [multifold.py](https://github.com/y-song/multifold-101326/blob/master/multifold.py)
+  - Input embedding file: `/nfs/roberts/home/ys668/output/run12/all050124_rc_notrueptcons.root`  
+    Output directory: `/nfs/roberts/project/pi_hlc7/ys668/run12/csvs/final_0628/20235003_data_batch50000_notrueptcons/`
+
 - Runs for systematic uncertainties
-  - Detector effect variations: Modify [multifold.py](https://github.com/y-song/multifold-101326/blob/master/multifold.py). Need to change input embedding file (line 119) and output path (line 204). No need to change input data file (line 128). In principle, also need to change the fake rates (line 134), but the variations we consider have minimal effect on them (same numerical values within two decimals).  
-  Input embedding files: `/nfs/roberts/home/ys668/output/run12/all050124_rc_eff096_notrueptcons.root`, `/nfs/roberts/home/ys668/output/run12/all050124_rc_tow104_notrueptcons.root`, `/nfs/roberts/home/ys668/output/run12/all050124_rc_hadcorr05_notrueptcons.root`  
-  Output directories: `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_eff096_notrueptcons/`, `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_tow104_notrueptcons/`, `/nfs/roberts/project/pi_hlc7/ys668/run12/csvs/final_0628/20235003_hadcorr05_notrueptcons/`
-  - Prior variations: [multifold_pythia8.py]() [multifold_herwig.py]() (TO DO)
+  - Detector effect variations:
+    - This is already done.
+    - What was done: Modified [multifold.py](https://github.com/y-song/multifold-101326/blob/master/multifold.py). Changed input embedding file (line 119) and output path (line 204). No need to change input data file (line 128). In principle, also need to change the fake rates (line 134), but the variations we consider have minimal effect on them (same numerical values within two decimals).  
+    - Input embedding files: `/nfs/roberts/home/ys668/output/run12/all050124_rc_eff096_notrueptcons.root`, `/nfs/roberts/home/ys668/output/run12/all050124_rc_tow104_notrueptcons.root`, `/nfs/roberts/home/ys668/output/run12/all050124_rc_hadcorr05_notrueptcons.root`  
+    Output directories: `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_eff096_notrueptcons/`, `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_tow104_notrueptcons/`, `/nfs/roberts/project/pi_hlc7/ys668/run12/csvs/final_0628/20235003_hadcorr05_notrueptcons/`
+  - Prior variations:
+    - This hasn't been done.
+    - What needs to be done: Modify [reweight_pythia_to_pythia8.ipynb](https://github.com/y-song/multifold-101326/blob/master/reweight_pythia_to_pythia8.ipynb). This reads in self-generated pythia8 jets `/nfs/roberts/pi/pi_lbh35/youqi/detroit_tune/pythia_*pthat*_multifold_truth.txt`, reweights MATCHED pythia6 jets by TRUTH pythia8/pythi6 ratio, and saves the output pythia6 jets into a csv file. Then [multifold_pythia8.py](https://github.com/y-song/multifold-101326/blob/master/multifold_pythia8.py) reads in the csv to run MultiFold. Similar for herwig, to be done with [reweight_pythia_to_herwig.ipynb] and [multifold_herwig.py].
 
 - Runs for statistical bootstrap
-  - Data resampling: [multifold_stat.py](https://github.com/y-song/multifold-101326/blob/master/multifold_stat.py)  
-  Output direcotry: `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_datastat_notrueptcons/`
-  - Embedding resampling: [multifold_mc_stat.py](https://github.com/y-song/multifold-101326/blob/master/multifold_mc_stat.py)  
-  Output directory: `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_stat_notrueptcons/`
+  - Data resampling:
+    - This is already done.
+    - [multifold_stat.py](https://github.com/y-song/multifold-101326/blob/master/multifold_stat.py)  
+    - Output direcotry: `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_datastat_notrueptcons/`
+  - Embedding resampling:
+    - This is already done.
+    - [multifold_mc_stat.py](https://github.com/y-song/multifold-101326/blob/master/multifold_mc_stat.py)  
+    - Output directory: `/nfs/roberts/pi/pi_lbh35/youqi/csvs/20235003_stat_notrueptcons/`
 
 - Full plotting script
   - [plot_full.ipynb](https://github.com/y-song/multifold-101326/blob/master/plot_full.ipynb)  
